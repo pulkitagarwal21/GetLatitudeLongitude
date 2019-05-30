@@ -1,0 +1,53 @@
+<div *ngIf="showLoader" class="outerloader">
+    <div  class="loader"></div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      
+      <div class="col-md-12">
+       <h1> Welcome to {{heading}}</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-inline" #location="ngForm">
+            <!-- <label for="search">Enter City Name </label> -->
+            <input type="text" placeholder="Enter City Name" class="form-control" id="search" [(ngModel)]="locationModel.city" name="city" required />
+          <button (click)="getLatLng()" [disabled]='!location.valid' class="btn btn-primary">Ok</button>
+        </form>
+    </div> 
+     
+    <div class="col-md-12">
+  
+      
+
+      <ng-container *ngIf="latitude && showLoader==false && noResponse==false">
+          <table class="table table-dark table-hover">
+              <thead>
+                <tr>
+                  <th>Latitude</th>
+                  <th>Longitude</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{latitude}}</td>
+                  <td>{{longitude}}</td>
+                </tr>
+              </tbody>
+            </table>
+      
+      </ng-container>
+
+      <ng-container *ngIf="noResponse && showLoader==false">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+                <th> City doesn't exist.</th>
+            </tr>
+      </thead>
+      </table>
+      </ng-container>
+
+    </div>  
+  </div>
+</div>
